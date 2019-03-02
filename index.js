@@ -159,7 +159,7 @@ exports.middleware = store => next => action => {
   if (type === 'SESSION_ADD_DATA') {
     const testedData = /^\[hyperlayout config]:(.*)/.exec(data)
     if (testedData && testedData[1]) {
-      const config = JSON.parse(testedData[1])
+      const config = JSON.parse(testedData[1].substring(0, testedData[1].lastIndexOf('}') + 1))
       hyperlayout = new Hyperlayout(config, store)
       return
     }
